@@ -3,15 +3,27 @@ import twint
 # from textblob_de import TextBlobDE
 from afinn import Afinn
 from datetime import date, timedelta
+import threading
+import asyncio
+from flask import Flask
 
 
-class Team:
+
+
+class Team(threading.Thread):
 
     def __init__(self, handle, sinceDate, lang):
+        threading.Thread.__init__(self)
+
         self.handle = handle
         self.sinceDate = date.today() - timedelta(sinceDate)
         self.lang = lang
+        self.totalTweets = None
+        self.sentimentScore = None
 
+
+    def run(self):
+        asyncio.set_event_loop(asyncio.new_event_loop())
         self.afinn = Afinn(emoticons=True)
 
         self.twintConfig = twint.Config()
@@ -20,7 +32,6 @@ class Team:
 
         self.totalTweets = self.calculateTotalTweets()
         self.sentimentScore = self.calculateSentimentScore()
-
 
     def configTwint(self):
         self.twintConfig.To = self.handle
@@ -52,7 +63,6 @@ class Team:
 
         while tweet:
             tweetScore = self.afinn.score(tweet)
-            print(tweetScore)
 
             if tweetScore != 0:
                 notNeutrals+=1
@@ -67,16 +77,29 @@ class Team:
 
 
 t1 = Team("@Rangers", 1, 'en')
+t1.start()
+
 t2 = Team("@astros", 1, 'en')
+t2.start()
 
+while True:
+    if not t1.isAlive() and not t2.isAlive():
+        print("--------------------------TEAM 1-------------------------------")
+        print("Analysiertes Team: " + str(t1.handle))
+        print("Anzahl der analysierten Tweets: " + str(t1.totalTweets))
+        print("Durchschnittlicher Sentiment Score: " + str(t1.sentimentScore))
+        print("--------------------------------------------------------------")
+        print("--------------------------TEAM 2-------------------------------")
+        print("Analysiertes Team: " + str(t2.handle))
+        print("Anzahl der analysierten Tweets: " + str(t2.totalTweets))
+        print("Durchschnittlicher Sentiment Score: " + str(t2.sentimentScore))
+        print("--------------------------------------------------------------")
+        break
 
-print("--------------------------TEAM 1-------------------------------")
-print("Analysiertes Team: " + str(t1.handle))
-print("Anzahl der analysierten Tweets: " + str(t1.totalTweets))
-print("Durchschnittlicher Sentiment Score: " + str(t1.sentimentScore))
-print("--------------------------------------------------------------")
-print("--------------------------TEAM 2-------------------------------")
-print("Analysiertes Team: " + str(t2.handle))
-print("Anzahl der analysierten Tweets: " + str(t2.totalTweets))
-print("Durchschnittlicher Sentiment Score: " + str(t2.sentimentScore))
-print("--------------------------------------------------------------")
+# app = Flask(__name__)
+#
+# @app.route("/")
+# def index():
+#     return "DAS IST EIN TEST"
+#
+# app.run(debug=True, host='127.0.0.1', port = '120')
