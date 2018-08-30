@@ -5,10 +5,7 @@ from afinn import Afinn
 from datetime import date, timedelta
 import threading
 import asyncio
-from flask import Flask
-
-
-
+from flask import Flask, render_template
 
 class Team(threading.Thread):
 
@@ -36,6 +33,7 @@ class Team(threading.Thread):
     def configTwint(self):
         self.twintConfig.To = self.handle
         self.twintConfig.Since = str(self.sinceDate)
+        self.twintConfig.Limit = 150
         self.twintConfig.Format = "{date} - {tweet}"
         self.twintConfig.Store_csv = True
         self.twintConfig.Custom = ["tweet"]
@@ -74,32 +72,70 @@ class Team(threading.Thread):
         score = score/notNeutrals
         return score
 
+class Server(threading.Thread):
+
+    def __init__(self):
+        threading.Thread.__init__(self)
+
+    def run(self):
+        app = Flask(__name__)
+
+        @app.route("/")
+        def index():
+            return "Synthax: crawler.adamlamine.com/compare/<strong>@Team1</strong>&<strong>@Team2</strong>&<strong>ZeitfensterInTagen</strong><br><br>" \
+                   "z.B.: @skrapid vs. @FKAustriaWien über die letzten 7 Tage -> crawler.adamlamine.com/compare/@skrapid&@FKAustriaWien&7"
+
+        @app.route("/compare/<team1>&<team2>&<int:time>")
+        def compare(team1, team2, time):
+
+            t1 = Team(team1, 1, 'en')
+            t1.start()
+
+            t2 = Team(team2, 1, 'en')
+            t2.start()
+
+            while True:
+                output = ""
+
+                if not t1.isAlive() and not t2.isAlive():
+
+                    # output += "Vergleiche " + team1 + " mit " + team2 + ". Zeitfenster: Letzte " + str(time) + " Tage.<br><br><br>"
+                    #
+                    # output += team1 + ": <br>"
+                    # output += "Anzahl der analysierten Tweets: " + str(t1.totalTweets) + "<br>"
+                    # output += "Durchschnittlicher Sentiment Score: " + str(t1.sentimentScore) + "<br><br>"
+                    #
+                    # output += team2 + ": <br>"
+                    # output += "Anzahl der analysierten Tweets: " + str(t2.totalTweets) + "<br>"
+                    # output += "Durchschnittlicher Sentiment Score: " + str(t2.sentimentScore) + "<br>"
+
+                    return render_template("index.html", team1=team1, team2=team2, tweets1=t1.totalTweets, tweets2=t2.totalTweets, score1=t1.sentimentScore, score2=t2.sentimentScore)
+                    break
 
 
-t1 = Team("@Rangers", 1, 'en')
-t1.start()
+        app.run(host='192.168.0.24', port = '80')
 
-t2 = Team("@astros", 1, 'en')
-t2.start()
 
-while True:
-    if not t1.isAlive() and not t2.isAlive():
-        print("--------------------------TEAM 1-------------------------------")
-        print("Analysiertes Team: " + str(t1.handle))
-        print("Anzahl der analysierten Tweets: " + str(t1.totalTweets))
-        print("Durchschnittlicher Sentiment Score: " + str(t1.sentimentScore))
-        print("--------------------------------------------------------------")
-        print("--------------------------TEAM 2-------------------------------")
-        print("Analysiertes Team: " + str(t2.handle))
-        print("Anzahl der analysierten Tweets: " + str(t2.totalTweets))
-        print("Durchschnittlicher Sentiment Score: " + str(t2.sentimentScore))
-        print("--------------------------------------------------------------")
-        break
 
-# app = Flask(__name__)
+
+
+serverThread = Server()
+serverThread.start()
+
+
 #
-# @app.route("/")
-# def index():
-#     return "DAS IST EIN TEST"
-#
-# app.run(debug=True, host='127.0.0.1', port = '120')
+# while True:
+#     if not t1.isAlive() and not t2.isAlive():
+#         print("--------------------------TEAM 1-------------------------------")
+#         print("Analysiertes Team: " + str(t1.handle))
+#         print("Anzahl der analysierten Tweets: " + str(t1.totalTweets))
+#         print("Durchschnittlicher Sentiment Score: " + str(t1.sentimentScore))
+#         print("--------------------------------------------------------------")
+#         print("--------------------------TEAM 2-------------------------------")
+#         print("Analysiertes Team: " + str(t2.handle))
+#         print("Anzahl der analysierten Tweets: " + str(t2.totalTweets))
+#         print("Durchschnittlicher Sentiment Score: " + str(t2.sentimentScore))
+#         print("--------------------------------------------------------------")
+#         break
+
+

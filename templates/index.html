@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<meta charset="utf-8">
+<title>TwitterScraper Demo</title>
+
+</head>
+
+<body onload = "init({{tweets1}}, {{tweets2}}, {{score1}}, {{score2}})">
+	
+<!--
+	<p>{{team1}}, Anzahl der analysierten Tweets: {{tweets1}}, Durchschnittlicher Sentiment Score: {{score1}}</p>
+	<p>{{team2}}, Anzahl der analysierten Tweets: {{tweets2}}, Durchschnittlicher Sentiment Score: {{score2}}</p>
+-->
+	
+	<div class="outerContainer">
+		<div class="teamContainer">	
+			<div class = "teamTitle">{{team1}}</div>
+			<div class = "teamAvatar" style = "background-image: url(https://avatars.io/twitter/{{team1}})"><p></p></div>
+			<div class = "teamTweets" id = "tweets1"><p>analysierte Tweets: {{tweets1}}</p></div>
+			<div class = "teamScore" id = "score1"><p>Sentiment Score: {{score1}}</p></div>
+		</div>
+		
+		<div class="teamContainer">	
+			<div class = "teamTitle">{{team2}}</div>
+			<div class = "teamAvatar" style = "background-image: url(https://avatars.io/twitter/{{team2}})"><p></p></div>
+			<div class = "teamTweets" id = "tweets2"><p>analysierte Tweets: {{tweets2}}</p></div>
+			<div class = "teamScore" id = "score2"><p>Sentiment Score: {{score2}}</p></div>
+		</div>
+	</div>
+	
+	<script src="{{ url_for('static', filename='bars.js') }}"></script>
+	
+</body>
+</html>

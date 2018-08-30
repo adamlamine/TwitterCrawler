@@ -1,0 +1,73 @@
+body{
+	background-color: rgba(13,5,63,1.00);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	width: 100vw;
+	margin: 0;
+	padding: 0;
+}
+
+.outerContainer{
+	width: 60%;
+	height: 80%;
+	border: rgba(255,255,255,0.50);
+	border-style: solid;
+	display: flex;
+	flex-direction: column;
+}
+
+.teamContainer{
+	height: 50%;
+}
+
+
+.teamTitle{
+	margin-top: 5%;
+	margin-left: 5%;
+	color: white;
+	font-weight: bold;
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif"
+}
+
+.teamAvatar{
+	background-size: contain;
+	margin-left: 5%;
+	height: 100px;
+	width: 100px;
+	background-color: white; 
+}
+
+.teamTweets{
+	overflow: visible;
+	white-space:nowrap;
+	margin-top: 3%;
+	margin-left: 5%;
+	height: 50px;
+	width: 90%;
+	background-color: rgba(0,215,84,1.00);
+}
+
+.teamScore{
+	overflow: visible;
+	white-space:nowrap;
+	margin-top: 1%;
+	margin-left: 5%;
+	height: 50px;
+	width: 90%;
+	background-color: orangered;
+}
+
+
+
+.teamTweets p, .teamScore p{
+	font-weight: bold;
+	color: rgba(255,255,255,1.00);
+	text-shadow: 0px 0px 3px #000000;
+	font-family: Arial;
+	font-size: 15px;
+	margin-left: 15px;
+	padding-top: 15px;
+}
+

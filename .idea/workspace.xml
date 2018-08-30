@@ -14,8 +14,8 @@
       <file leaf-file-name="TwitterCrawler.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TwitterCrawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="98" selection-start-line="98" selection-start-column="2" selection-end-line="104" selection-end-column="53" />
+            <state relative-caret-position="254">
+              <caret line="35" column="36" lean-forward="true" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -44,9 +44,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-180" />
-    <option name="y" value="-14" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="45" />
+    <option name="y" value="1052" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -61,6 +61,11 @@
             <path>
               <item name="TwitterCrawler" type="b2602c69:ProjectViewProjectNode" />
               <item name="TwitterCrawler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TwitterCrawler" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TwitterCrawler" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -133,7 +138,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="1072" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24868283" />
@@ -212,8 +217,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TwitterCrawler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="98" selection-start-line="98" selection-start-column="2" selection-end-line="104" selection-end-column="53" />
+        <state relative-caret-position="254">
+          <caret line="35" column="36" lean-forward="true" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
