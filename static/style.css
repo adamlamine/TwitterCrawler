@@ -22,13 +22,41 @@ body{
 	height: 50%;
 }
 
+.input-container{
+	display: flex;
+	flex-direction: row;
+}
 
 .teamTitle{
 	margin-top: 5%;
 	margin-left: 5%;
+	height: 24px!important;
+	font-size: 20px;
 	color: white;
+	background-color: rgba(255,255,255,0.00);
 	font-weight: bold;
-	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif"
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+	border: solid 1px;
+}
+
+.button{
+	height: 28px;
+	width: 28px;
+	margin-top: 5%;
+	margin-left: 5px;
+	-webkit-appearance:default-button;
+	
+	font-size: 13px;
+	background-color: rgba(255,255,255,0.00);
+	border: solid 2px;
+	border-color: white;
+	font-weight: bold;
+	color:white;
+	font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+}
+
+.button:hover{
+	cursor: pointer;
 }
 
 .teamAvatar{

@@ -5,7 +5,7 @@ from afinn import Afinn
 from datetime import date, timedelta
 import threading
 import asyncio
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 
 class Team(threading.Thread):
 
@@ -33,7 +33,7 @@ class Team(threading.Thread):
     def configTwint(self):
         self.twintConfig.To = self.handle
         self.twintConfig.Since = str(self.sinceDate)
-        self.twintConfig.Limit = 150
+        # self.twintConfig.Limit = 150
         self.twintConfig.Format = "{date} - {tweet}"
         self.twintConfig.Store_csv = True
         self.twintConfig.Custom = ["tweet"]
@@ -82,16 +82,19 @@ class Server(threading.Thread):
 
         @app.route("/")
         def index():
-            return "Synthax: crawler.adamlamine.com/compare/<strong>@Team1</strong>&<strong>@Team2</strong>&<strong>ZeitfensterInTagen</strong><br><br>" \
-                   "z.B.: @skrapid vs. @FKAustriaWien über die letzten 7 Tage -> crawler.adamlamine.com/compare/@skrapid&@FKAustriaWien&7"
+            return redirect("/compare/", code=302)
+
+        @app.route("/compare/")
+        def start():
+            return render_template("index.html")
 
         @app.route("/compare/<team1>&<team2>&<int:time>")
         def compare(team1, team2, time):
 
-            t1 = Team(team1, 1, 'en')
+            t1 = Team(team1, time, 'en')
             t1.start()
 
-            t2 = Team(team2, 1, 'en')
+            t2 = Team(team2, time, 'en')
             t2.start()
 
             while True:

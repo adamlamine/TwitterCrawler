@@ -2,7 +2,6 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-<meta charset="utf-8">
 <title>TwitterScraper Demo</title>
 
 </head>
@@ -16,14 +15,18 @@
 	
 	<div class="outerContainer">
 		<div class="teamContainer">	
-			<div class = "teamTitle">{{team1}}</div>
+			<div class = "input-container">
+				<input type="text" name = "input1" id = "input1" class = "teamTitle" value = "{{team1}}" onsubmit = "refresh()"><button class = "button" onclick = "refresh()">⮚</button>
+			</div>
 			<div class = "teamAvatar" style = "background-image: url(https://avatars.io/twitter/{{team1}})"><p></p></div>
 			<div class = "teamTweets" id = "tweets1"><p>analysierte Tweets: {{tweets1}}</p></div>
 			<div class = "teamScore" id = "score1"><p>Sentiment Score: {{score1}}</p></div>
 		</div>
 		
 		<div class="teamContainer">	
-			<div class = "teamTitle">{{team2}}</div>
+			<div class = "input-container">
+				<input type="text" name = "input2" id = "input2" class = "teamTitle" value = "{{team2}}" onsubmit = "refresh()"><button class = "button" onclick = "refresh()">⮚</button>
+			</div>
 			<div class = "teamAvatar" style = "background-image: url(https://avatars.io/twitter/{{team2}})"><p></p></div>
 			<div class = "teamTweets" id = "tweets2"><p>analysierte Tweets: {{tweets2}}</p></div>
 			<div class = "teamScore" id = "score2"><p>Sentiment Score: {{score2}}</p></div>
